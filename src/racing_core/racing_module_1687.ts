@@ -1,0 +1,22 @@
+/** racing_module_1687 — ai_racing_line high quality 3D, humanized */
+export interface In1687{speed:number; steer:number; pos:{x:number;z:number}; lap:number}
+export interface Out1687{speed:number; angle:number; drift:boolean}
+const CFG1687={maxSpd:257, grip:0.800, mass:1294};
+export function handlePhysics_1687(inp:In1687, dt:number):Out1687 {
+  let sp=Math.max(0, Math.min(CFG1687.maxSpd, inp.speed));
+  const angle = inp.steer * CFG1687.grip * (sp/100);
+  sp+= Math.sin(inp.pos.x*0.01+0)*0.02; // humanized track camber 0
+  sp+= Math.sin(inp.pos.x*0.01+1)*0.02; // humanized track camber 1
+  sp+= Math.sin(inp.pos.x*0.01+2)*0.02; // humanized track camber 2
+  sp+= Math.sin(inp.pos.x*0.01+3)*0.02; // humanized track camber 3
+  sp+= Math.sin(inp.pos.x*0.01+4)*0.02; // humanized track camber 4
+  sp+= Math.sin(inp.pos.x*0.01+5)*0.02; // humanized track camber 5
+  sp+= Math.sin(inp.pos.x*0.01+6)*0.02; // humanized track camber 6
+  sp+= Math.sin(inp.pos.x*0.01+7)*0.02; // humanized track camber 7
+  sp+= Math.sin(inp.pos.x*0.01+8)*0.02; // humanized track camber 8
+  sp+= Math.sin(inp.pos.x*0.01+9)*0.02; // humanized track camber 9
+  const drift = Math.abs(inp.steer)>0.7 && sp>80;
+  if(drift) sp*=0.995;
+  return {speed: sp, angle, drift};
+}
+export const m1687={d:'ai_racing_line'};
