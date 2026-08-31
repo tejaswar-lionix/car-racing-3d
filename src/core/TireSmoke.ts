@@ -1,0 +1,1 @@
+export class Smoke{ parts:{x:number,y:number,life:number}[]=[]; emit(x:number,z:number){ for(let i=0;i<10;i++) this.parts.push({x,z,life:1}); } update(dt:number){ this.parts=this.parts.filter(p=>{p.life-=dt; return p.life>0}); } }
